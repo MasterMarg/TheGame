@@ -10,7 +10,8 @@ public class Battle {
     public static final String ANSI_WHITE_BOLD = "\u001B[30;1m";
     public static final String ANSI_GREEN_BOLD = "\u001B[32;1m";
     public static final String ANSI_VIOLET = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36;1m";
+    public static final String ANSI_CYAN_BOLD = "\u001B[36;1m";
+    public static final String ANSI_BOLD = "\u001B[0;1m";
 
     private final DateHelper dateHelper;
     private final Squad redSquad;
@@ -27,24 +28,23 @@ public class Battle {
         attackLog[0] = this.dateHelper.getDate();
         Unit unit1 = squad1.getRandomUnit();
         Unit unit2 = squad2.getRandomUnit();
-        attackLog[1] = unit1.toString() + unit1.getUnitVitalityCard() + " атакует " + unit2.toString()
-                + unit2.getUnitVitalityCard();
+        attackLog[1] = unit1.toString() + ANSI_BOLD + unit1.getUnitVitalityCard() + ANSI_RESET + " атакует " +
+                unit2.toString() + ANSI_BOLD + unit2.getUnitVitalityCard() + ANSI_RESET;
         int[] attackData = unit1.attack();
         int attack = attackData[0];
         int vitality = unit2.getCurrentVitality();
         int damage = unit2.takeDamage(unit1, attack);
         String attackString = "" + attack;
-        if (attackData[1]==1) attackString = ANSI_BOLD_YELLOW + attackString + ANSI_RESET;
+        if (attackData[1] == 1) attackString = ANSI_BOLD_YELLOW + attackString + ANSI_RESET;
         else attackString = ANSI_WHITE_BOLD + attackString + ANSI_RESET;
         if (unit1 instanceof Mage) {
-            attackLog[2] = unit1.toString() + " наносит " + attackString + ANSI_CYAN + "(-" + (attack - damage)
+            attackLog[2] = unit1.toString() + " наносит " + attackString + ANSI_CYAN_BOLD + "(-" + (attack - damage)
                     + ")" + ANSI_RESET + reformString(attack) + " урона.";
-        }
-        else  {
+        } else {
             attackLog[2] = unit1.toString() + " наносит " + attackString + ANSI_GREEN_BOLD + "(-" + (attack - damage)
                     + ")" + ANSI_RESET + reformString(attack) + " урона.";
         }
-        if (attackData[1]==1)
+        if (attackData[1] == 1)
             attackLog[2] = attackLog[2] + ANSI_BOLD_YELLOW + " Критический удар!" + ANSI_RESET;
         if (unit2.isAlive())
             attackLog[3] = unit2.toString() + " теряет " + damage + reformString(damage) + " здоровья.\n";

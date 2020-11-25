@@ -4,9 +4,6 @@ import com.company.Battle.Squads.Units.Race;
 import com.company.Battle.Squads.Units.Unit;
 
 public class Archer implements Unit, Cloneable {
-    public static final String ANSI_BOLD = "\u001B[0;1m";
-    public static final String ANSI_RESET = "\u001B[0m";
-
     private final static double strengthModifier = 0.9;
     private final static double dexterityModifier = 1.4;
     private final static double intelligenceModifier = 0.7;
@@ -86,7 +83,7 @@ public class Archer implements Unit, Cloneable {
     }
 
     public String getUnitVitalityCard() {
-        return ANSI_BOLD + " (" + this.getCurrentVitality() + "/" + this.getVitality() + ") " + ANSI_RESET;
+        return " (" + this.getCurrentVitality() + "/" + this.getVitality() + ")";
     }
 
 

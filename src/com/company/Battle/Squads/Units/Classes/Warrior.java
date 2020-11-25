@@ -4,9 +4,6 @@ import com.company.Battle.Squads.Units.Race;
 import com.company.Battle.Squads.Units.Unit;
 
 public class Warrior implements Unit, Cloneable {
-    public static final String ANSI_BOLD = "\u001B[0;1m";
-    public static final String ANSI_RESET = "\u001B[0m";
-
     private final static double strengthModifier = 1.3;
     private final static double dexterityModifier = 1;
     private final static double intelligenceModifier = 0.7;
@@ -86,7 +83,7 @@ public class Warrior implements Unit, Cloneable {
     }
 
     public String getUnitVitalityCard() {
-        return ANSI_BOLD + " (" + this.getCurrentVitality() + "/" + this.getVitality() + ") " + ANSI_RESET;
+        return " (" + this.getCurrentVitality() + "/" + this.getVitality() + ")";
     }
 
     public int[] attack() {
