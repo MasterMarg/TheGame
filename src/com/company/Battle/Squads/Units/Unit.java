@@ -10,9 +10,7 @@ public interface Unit {
 
     void setSquadName(String name);
 
-    String getClassName();
-
-    void setClassName(String name);
+    String getSquadName();
 
     int getStrength();
 

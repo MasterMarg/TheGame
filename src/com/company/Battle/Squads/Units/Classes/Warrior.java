@@ -14,7 +14,7 @@ public class Warrior implements Unit, Cloneable {
     private final int defense;
     private final int resistance;
     private String squadName;
-    private String className;
+    private final String className;
     private final Race race;
     private final int vitality;
 
@@ -43,23 +43,7 @@ public class Warrior implements Unit, Cloneable {
 
     @Override
     public Warrior clone() throws CloneNotSupportedException {
-        Warrior warrior = (Warrior) super.clone();
-        switch (warrior.race) {
-            case WOOD_ELF -> warrior.className = "Танцующий с клинками";
-            case HIGH_ELF -> warrior.className = "Мастер клинка";
-            case DWARF -> warrior.className = "Мастер топора";
-            case ORC -> warrior.className = "Берсерк";
-            default -> warrior.className = "Воин";
-        }
-        return warrior;
-    }
-
-    public void setClassName(String name) {
-        this.className = name;
-    }
-
-    public String getClassName() {
-        return this.className;
+        return (Warrior) super.clone();
     }
 
     public int getStrength() {
@@ -115,5 +99,9 @@ public class Warrior implements Unit, Cloneable {
 
     public void setSquadName(String name) {
         this.squadName = name;
+    }
+
+    public String getSquadName() {
+        return this.squadName;
     }
 }

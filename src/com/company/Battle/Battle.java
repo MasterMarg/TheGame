@@ -12,6 +12,8 @@ public class Battle {
     public static final String ANSI_VIOLET = "\u001B[35m";
     public static final String ANSI_CYAN_BOLD = "\u001B[36;1m";
     public static final String ANSI_BOLD = "\u001B[0;1m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLUE = "\u001B[34m";
 
     private final DateHelper dateHelper;
     private final Squad redSquad;
@@ -28,8 +30,9 @@ public class Battle {
         attackLog[0] = this.dateHelper.getDate();
         Unit unit1 = squad1.getRandomUnit();
         Unit unit2 = squad2.getRandomUnit();
-        attackLog[1] = unit1.toString() + ANSI_BOLD + unit1.getUnitVitalityCard() + ANSI_RESET + " атакует " +
-                unit2.toString() + ANSI_BOLD + unit2.getUnitVitalityCard() + ANSI_RESET;
+
+        attackLog[1] = getPainted(unit1) + ANSI_BOLD + unit1.getUnitVitalityCard() + ANSI_RESET + " атакует " +
+                getPainted(unit2) + ANSI_BOLD + unit2.getUnitVitalityCard() + ANSI_RESET;
         int[] attackData = unit1.attack();
         int attack = attackData[0];
         int vitality = unit2.getCurrentVitality();
@@ -38,17 +41,17 @@ public class Battle {
         if (attackData[1] == 1) attackString = ANSI_BOLD_YELLOW + attackString + ANSI_RESET;
         else attackString = ANSI_WHITE_BOLD + attackString + ANSI_RESET;
         if (unit1 instanceof Mage) {
-            attackLog[2] = unit1.toString() + " наносит " + attackString + ANSI_CYAN_BOLD + "(-" + (attack - damage)
+            attackLog[2] = getPainted(unit1) + " наносит " + attackString + ANSI_CYAN_BOLD + "(-" + (attack - damage)
                     + ")" + ANSI_RESET + reformString(attack) + " урона.";
         } else {
-            attackLog[2] = unit1.toString() + " наносит " + attackString + ANSI_GREEN_BOLD + "(-" + (attack - damage)
+            attackLog[2] = getPainted(unit1) + " наносит " + attackString + ANSI_GREEN_BOLD + "(-" + (attack - damage)
                     + ")" + ANSI_RESET + reformString(attack) + " урона.";
         }
         if (attackData[1] == 1)
             attackLog[2] = attackLog[2] + ANSI_BOLD_YELLOW + " Критический удар!" + ANSI_RESET;
         if (unit2.isAlive())
-            attackLog[3] = unit2.toString() + " теряет " + damage + reformString(damage) + " здоровья.\n";
-        else attackLog[3] = unit2.toString() + " теряет " + vitality + reformString(vitality) + " здоровья.\n";
+            attackLog[3] = getPainted(unit2) + " теряет " + damage + reformString(damage) + " здоровья.\n";
+        else attackLog[3] = getPainted(unit2) + " теряет " + vitality + reformString(vitality) + " здоровья.\n";
         if (!unit2.isAlive()) attackLog[3] = attackLog[3] + ANSI_VIOLET + "Боец убит.\n" + ANSI_RESET;
         if (squad2.hasAliveUnits()) this.dateHelper.skipTime();
         return attackLog;
@@ -76,5 +79,15 @@ public class Battle {
 
     public DateHelper getDateHelper() {
         return this.dateHelper;
+    }
+
+    public String getPainted(Unit unit){
+        String output;
+        switch (unit.getSquadName()){
+            case "Красный" -> output = ANSI_RED + unit.toString() + ANSI_RESET;
+            case "Синий" -> output = ANSI_BLUE + unit.toString() + ANSI_RESET;
+            default -> output = unit.toString();
+        }
+        return output;
     }
 }

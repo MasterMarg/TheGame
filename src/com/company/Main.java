@@ -3,8 +3,6 @@ package com.company;
 import com.company.Battle.Battle;
 
 public class Main {
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BOLD = "\u001B[0;1m";
     public static final String ANSI_BOLD_RED = "\u001B[31;1m";
@@ -26,18 +24,14 @@ public class Main {
         }
         if (battle.getRedSquad().hasAliveUnits()) {
             switch (battle.getRedSquad().toString()) {
-                case ANSI_RED + "Красный" + ANSI_RESET ->
-                        System.out.println(ANSI_BOLD_RED + "Победил красный отряд" + ANSI_RESET);
-                case ANSI_BLUE + "Синий" + ANSI_RESET ->
-                        System.out.println(ANSI_BOLD_BLUE + "Победил синий отряд" + ANSI_RESET);
+                case "Красный" -> System.out.println(ANSI_BOLD_RED + "Победил красный отряд" + ANSI_RESET);
+                case "Синий" -> System.out.println(ANSI_BOLD_BLUE + "Победил синий отряд" + ANSI_RESET);
                 default -> System.out.println("Победил " + battle.getRedSquad().toString() + " отряд. (Первый)");
             }
         } else {
             switch (battle.getBlueSquad().toString()) {
-                case ANSI_RED + "Красный" + ANSI_RESET ->
-                        System.out.println(ANSI_BOLD_RED + "Победил красный отряд" + ANSI_RESET);
-                case ANSI_BLUE + "Синий" + ANSI_RESET ->
-                        System.out.println(ANSI_BOLD_BLUE + "Победил синий отряд" + ANSI_RESET);
+                case "Красный" -> System.out.println(ANSI_BOLD_RED + "Победил красный отряд" + ANSI_RESET);
+                case "Синий" -> System.out.println(ANSI_BOLD_BLUE + "Победил синий отряд" + ANSI_RESET);
                 default -> System.out.println("Победил " + battle.getRedSquad().toString() + " отряд. (Второй)");
             }
         }

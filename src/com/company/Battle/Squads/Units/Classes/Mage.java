@@ -14,7 +14,7 @@ public class Mage implements Unit, Cloneable {
     private final int defense;
     private final int resistance;
     private String squadName;
-    private String className;
+    private final String className;
     private final Race race;
     private final int vitality;
 
@@ -43,23 +43,7 @@ public class Mage implements Unit, Cloneable {
 
     @Override
     public Mage clone() throws CloneNotSupportedException {
-        Mage mage = (Mage) super.clone();
-        switch (mage.race) {
-            case WOOD_ELF -> mage.className = "Друид";
-            case HIGH_ELF -> mage.className = "Волшебник";
-            case DWARF -> mage.className = "Рунный жрец";
-            case ORC -> mage.className = "Шаман племени";
-            default -> mage.className = "Маг";
-        }
-        return mage;
-    }
-
-    public void setClassName(String name) {
-        this.className = name;
-    }
-
-    public String getClassName() {
-        return this.className;
+        return (Mage) super.clone();
     }
 
     public int getStrength() {
@@ -116,5 +100,9 @@ public class Mage implements Unit, Cloneable {
 
     public void setSquadName(String name) {
         this.squadName = name;
+    }
+
+    public String getSquadName() {
+        return this.squadName;
     }
 }

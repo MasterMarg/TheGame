@@ -14,7 +14,7 @@ public class Archer implements Unit, Cloneable {
     private final int defense;
     private final int resistance;
     private String squadName;
-    private String className;
+    private final String className;
     private final Race race;
     private final int vitality;
 
@@ -43,23 +43,7 @@ public class Archer implements Unit, Cloneable {
 
     @Override
     public Archer clone() throws CloneNotSupportedException {
-        Archer archer = (Archer) super.clone();
-        switch (archer.race) {
-            case WOOD_ELF -> archer.className = "Мастер лука";
-            case HIGH_ELF -> archer.className = "Эльфийский лучник";
-            case DWARF -> archer.className = "Арбалетчик";
-            case ORC -> archer.className = "Проклятый стрелок";
-            default -> archer.className = "Лучник";
-        }
-        return archer;
-    }
-
-    public void setClassName(String name) {
-        this.className = name;
-    }
-
-    public String getClassName() {
-        return this.className;
+        return (Archer) super.clone();
     }
 
     public int getStrength() {
@@ -116,5 +100,9 @@ public class Archer implements Unit, Cloneable {
 
     public void setSquadName(String name) {
         this.squadName = name;
+    }
+
+    public String getSquadName() {
+        return this.squadName;
     }
 }
