@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.Battle.Battle;
+import com.company.Battle.Squads.Squad;
 
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -22,19 +23,18 @@ public class Main {
                 }
             }
         }
-        if (battle.getRedSquad().hasAliveUnits()) {
-            switch (battle.getRedSquad().toString()) {
-                case "Красный" -> System.out.println(ANSI_BOLD_RED + "Победил красный отряд" + ANSI_RESET);
-                case "Синий" -> System.out.println(ANSI_BOLD_BLUE + "Победил синий отряд" + ANSI_RESET);
-                default -> System.out.println("Победил " + battle.getRedSquad().toString() + " отряд. (Первый)");
-            }
-        } else {
-            switch (battle.getBlueSquad().toString()) {
-                case "Красный" -> System.out.println(ANSI_BOLD_RED + "Победил красный отряд" + ANSI_RESET);
-                case "Синий" -> System.out.println(ANSI_BOLD_BLUE + "Победил синий отряд" + ANSI_RESET);
-                default -> System.out.println("Победил " + battle.getRedSquad().toString() + " отряд. (Второй)");
-            }
-        }
+        if (battle.getRedSquad().hasAliveUnits()) System.out.println(getResult(battle.getRedSquad()));
+        else System.out.println(getResult(battle.getBlueSquad()));
         System.out.println(ANSI_BOLD + "Битва продолжалась " + battle.getDateHelper().getFormattedDiff() + ANSI_RESET);
+    }
+
+    public static String getResult(Squad squad) {
+        String result;
+        switch (squad.toString()) {
+            case "Красный" -> result = ANSI_BOLD_RED + "Победил красный отряд" + ANSI_RESET;
+            case "Синий" -> result = ANSI_BOLD_BLUE + "Победил синий отряд" + ANSI_RESET;
+            default -> result = "Победил " + squad.toString() + " отряд. (Первый)";
+        }
+        return result;
     }
 }
