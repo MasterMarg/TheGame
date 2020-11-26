@@ -74,9 +74,9 @@ public class Mage implements Unit, Cloneable {
     public int[] attack() {
         int[] output = new int[2];
         if ((Math.random() * 100) < (5 * this.race.intelligence * intelligenceModifier / 10)) {
-            output[0] = ((int) ((this.race.intelligence * intelligenceModifier * 10)+0.01));
+            output[0] = ((int) ((this.race.intelligence * intelligenceModifier * 10) + 0.01));
             output[1] = 1;
-        } else output[0] = ((int) ((this.race.intelligence * intelligenceModifier * 5)+0.01));
+        } else output[0] = ((int) ((this.race.intelligence * intelligenceModifier * 5) + 0.01));
         return output;
     }
 
